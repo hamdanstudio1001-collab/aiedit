@@ -2,33 +2,53 @@ import streamlit as st
 from PIL import Image
 
 st.set_page_config(
-    page_title="AiEdit Demo",
+    page_title="AiEdit Age Transformation (Demo)",
     page_icon="✨",
     layout="centered"
 )
 
-st.title("✨ AiEdit Image Editor (Demo Version)")
-st.caption("Owner: Hamdan Studio")   # ✅ owner line
+st.title("✨ AiEdit Age Transformation (Demo)")
+st.caption("Owner: Hamdan Studio")
 st.write("❌ No API • ❌ No Backend • ✅ Error-Free")
 
 st.divider()
 
-uploaded_file = st.file_uploader(
-    "📤 Upload Image",
-    type=["png", "jpg", "jpeg"]
+st.subheader("👶 Upload Childhood Photo")
+child_img = st.file_uploader(
+    "Bachpan ki photo upload karo",
+    type=["png", "jpg", "jpeg"],
+    key="child"
 )
 
-if uploaded_file:
-    image = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded Image", use_column_width=True)
+st.subheader("🧑 Upload Adult Photo")
+adult_img = st.file_uploader(
+    "Jawani ki photo upload karo",
+    type=["png", "jpg", "jpeg"],
+    key="adult"
+)
+
+if child_img and adult_img:
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.image(
+            Image.open(child_img),
+            caption="👶 Childhood",
+            use_column_width=True
+        )
+
+    with col2:
+        st.image(
+            Image.open(adult_img),
+            caption="🧑 Adult",
+            use_column_width=True
+        )
+
+    st.success("✅ Both images uploaded successfully")
 
 st.divider()
 
-prompt = st.text_input(
-    "✍️ Enter prompt (demo only)",
-    placeholder="make it anime, cinematic, HD..."
-)
-
-if st.button("✨ Generate AiEdit Image"):
-    st.success("✅ Demo mode working")
-    st.info("🔒 API disabled. This is UI demo only.")
+if st.button("✨ Generate Age Transformation"):
+    st.warning("⚠️ Demo mode")
+    st.info("Real AI transformation API baad me connect hogi")
+    st.success("UI ready for Bachpan ➜ Jawani feature 🚀")
